@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "portal-logger"
-version = "1.0.0"
-description = "Logger padronizado para RPAs enviarem logs para o portal corporativo"
+version = "0.1.1"
+description = "Logger padronizado para RPAs enviarem logs ao portal"
 authors = [
   { name="Time RPA", email="rpa@suaempresa.com" }
 ]

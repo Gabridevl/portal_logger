@@ -1,11 +1,21 @@
+import os
 from datetime import datetime
 from .client import PortalClient
 from .status import LogStatus
 
 
 class PortalLogger:
-    def __init__(self, token: str):
+    def __init__(self, token: str | None = None):
         self.start_time = datetime.now()
+
+        # Token pode vir por parâmetro OU variável de ambiente
+        token = token or os.getenv("PORTAL_LOG_TOKEN")
+        if not token:
+            raise RuntimeError(
+                "Token não informado. Configure a variável de ambiente PORTAL_LOG_TOKEN "
+                "ou passe o token no construtor."
+            )
+
         self.client = PortalClient(token)
 
     def _send(self, status: LogStatus, message: str):
