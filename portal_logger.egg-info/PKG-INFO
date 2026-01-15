@@ -1,0 +1,29 @@
+Metadata-Version: 2.4
+Name: portal-logger
+Version: 1.0.0
+Summary: Logger padronizado para RPAs enviarem logs para o portal corporativo
+Author-email: Time RPA <rpa@suaempresa.com>
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.31.0
+
+# portal-logger
+
+Biblioteca padrão para envio de logs dos RPAs para o portal corporativo.
+
+## 🎯 Objetivo
+Padronizar o envio de logs, removendo do código dos robôs:
+- montagem de payload
+- controle de datas
+- códigos de status
+- endpoint da API
+
+O desenvolvedor do RPA só informa **o que aconteceu**.
+
+---
+
+## 📦 Instalação
+
+Local:
+```bash
+pip install .

@@ -1,31 +1,28 @@
-import os
+from datetime import datetime
 import requests
-
-ENDPOINT_URL = os.getenv("PORTAL_LOG_ENDPOINT")
-
-if not ENDPOINT_URL:
-    raise RuntimeError("PORTAL_LOG_ENDPOINT não configurado")
+import os
 
 class PortalClient:
-    def __init__(self, token: str, timeout: int = 10):
-        self.token = token
-        self.timeout = timeout
+    def __init__(self, token: str):
+        self.endpoint = os.getenv("PORTAL_LOG_ENDPOINT")
+        if not self.endpoint:
+            raise RuntimeError("PORTAL_LOG_ENDPOINT não configurado")
 
-    def send(self, cod, message, start_time, end_time):
+        self.token = token
+
+    def _format_datetime(self, dt: datetime) -> str:
+        return dt.strftime("%Y/%m/%d %H:%M:%S")
+
+    def send(self, cod, message, start_time: datetime, end_time: datetime):
         payload = {
-            "startTime": start_time.isoformat(),
-            "endTime": end_time.isoformat(),
-            "cod": cod,
+            "startTime": self._format_datetime(start_time),
+            "endTime": self._format_datetime(end_time),
+            "cod": int(cod),
             "token": self.token,
             "details": {
                 "massaje": message
             }
         }
 
-        response = requests.post(
-            ENDPOINT_URL,
-            json=payload,
-            timeout=self.timeout
-        )
-
+        response = requests.post(self.endpoint, json=payload)
         response.raise_for_status()
