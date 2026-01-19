@@ -4,9 +4,9 @@ import os
 
 class PortalClient:
     def __init__(self, token: str):
-        self.endpoint = os.getenv("PORTAL_LOG_ENDPOINT")
+        self.endpoint = os.getenv("PORTAL_ENDPOINT")
         if not self.endpoint:
-            raise RuntimeError("PORTAL_LOG_ENDPOINT não configurado")
+            raise RuntimeError("PORTAL_ENDPOINT não configurado")
 
         self.token = token
 
