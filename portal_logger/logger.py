@@ -5,18 +5,22 @@ from .status import LogStatus
 
 
 class PortalLogger:
-    def __init__(self, token: str | None = None):
+    def __init__(self, token: str | None = None, endpoint: str | None = None):
         self.start_time = datetime.now()
 
-        # Token pode vir por parâmetro OU variável de ambiente
-        token = token or os.getenv("PORTAL_LOG_TOKEN")
-        if not token:
-            raise RuntimeError(
-                "Token não informado. Configure a variável de ambiente PORTAL_LOG_TOKEN "
-                "ou passe o token no construtor."
-            )
+        token = token or os.getenv("PORTAL_TOKEN")
+        endpoint = endpoint or os.getenv("PORTAL_ENDPOINT")
 
-        self.client = PortalClient(token)
+        if not token:
+            raise ValueError("PORTAL_TOKEN não definido (env ou parâmetro)")
+
+        if not endpoint:
+            raise ValueError("PORTAL_ENDPOINT não definido (env ou parâmetro)")
+
+        self.client = PortalClient(
+            token=token,
+            endpoint=endpoint
+        )
 
     def _send(self, status: LogStatus, message: str):
         end_time = datetime.now()
