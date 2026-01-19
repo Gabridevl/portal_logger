@@ -4,23 +4,33 @@ from .client import PortalClient
 from .status import LogStatus
 
 
+import os
+from datetime import datetime
+from .client import PortalClient
+
+
 class PortalLogger:
     def __init__(self, token: str | None = None, endpoint: str | None = None):
         self.start_time = datetime.now()
 
-        token = token or os.getenv("PORTAL_TOKEN")
-        endpoint = endpoint or os.getenv("PORTAL_ENDPOINT")
+        self.token = token or os.getenv("PORTAL_TOKEN")
+        self.endpoint = endpoint or os.getenv("PORTAL_ENDPOINT")
 
-        if not token:
-            raise ValueError("PORTAL_TOKEN não definido (env ou parâmetro)")
+        if not self.token:
+            raise ValueError(
+                "Token não definido. Configure PORTAL_TOKEN ou passe no construtor."
+            )
 
-        if not endpoint:
-            raise ValueError("PORTAL_ENDPOINT não definido (env ou parâmetro)")
+        if not self.endpoint:
+            raise ValueError(
+                "Endpoint não definido. Configure PORTAL_ENDPOINT ou passe no construtor."
+            )
 
         self.client = PortalClient(
-            token=token,
-            endpoint=endpoint
+            token=self.token,
+            endpoint=self.endpoint
         )
+
 
     def _send(self, status: LogStatus, message: str):
         end_time = datetime.now()
