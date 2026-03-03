@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "portal-logger"
-version = "0.2.4"
+version = "0.2.5"
 description = "Logger padronizado para RPAs enviarem logs ao portal"
 authors = [
-  { name="Time RPA", email="rpa@suaempresa.com" }
+  { name="TIVIT RPA", email="gabriel.feitosa@tivit.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.10"

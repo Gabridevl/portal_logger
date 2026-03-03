@@ -8,3 +8,4 @@ class LogStatus(IntEnum):
     ATENCAO = 100
     PENDENTE = 300
     CANCELADO = 501
+

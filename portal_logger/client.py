@@ -20,7 +20,7 @@ class PortalClient:
             "cod": int(cod),
             "token": self.token,
             "details": {
-                "massaje": message
+                "message": message
             }
         }
 
